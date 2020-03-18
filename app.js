@@ -1,10 +1,13 @@
 const express = require("express")
-const exhbs = require("express-handlebars")
+const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const path = require("path")
 const port = 5000
 
 const app = express()
+
+app.engine("handlebars", exphbs({defaultLayout: "main"}))
+app.set("view engine", "handlebars")
 
 //Datebase
 const db = require("./config/database")

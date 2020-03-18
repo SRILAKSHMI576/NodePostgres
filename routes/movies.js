@@ -6,7 +6,7 @@ const Movie = require("../models/movie")
 router.get("/", (req, res) => 
 Movie.findAll()
 	.then(movies => {
-		console.log(movies)
+		res.send(movies)
 		res.sendStatus(200)
 	})
 	.catch(err => console.log(err))

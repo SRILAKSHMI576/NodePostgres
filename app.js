@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
 	res.send("hiiiiiiiiii")
 })
 
+//routes
+app.use("/movies", require("./routes/movies"))
+
 app.listen(port, (req, res) => {
 	console.log("server started")
 })

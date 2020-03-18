@@ -1,16 +1,7 @@
 const Sequelize = require("sequelize")
-const sequelize = new Sequelize('movies', 'sri', '123', {
-	host: 'localhost',
-	dialect: 'postgres' ,
-	port:5432,
-	pool: {
-		max: 30,
-		min: 0,
-		idle: 10000
-	  }
-});
+const db = require("../config/database")
 
-const movie = sequelize.define('movie', {
+const Movie = db.define('movie', {
 	id: {
 		type: Sequelize.INTEGER,
 		primaryKey: true,
@@ -38,13 +29,5 @@ const movie = sequelize.define('movie', {
 		defaultValue: null
 	}
   });
-movie.sync({}).then(function(){
-	return movie.create({
-		id:3,
-		name:"Script",
-		age:56
-	}).then(function(user){
-		console.log(user);
-	})
-});
 
+module.exports = Movie;

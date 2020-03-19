@@ -32,7 +32,7 @@ router.post("/", (req, res) => {
 
 //get movie by single id
 router.get("/:id", (req, res) => {
-	Movie.findById(req.params.id)
+	Movie.findByPk(req.params.id)
 	.then(movies => {
 		res.send(movies)
 		res.sendStatus(200)
@@ -42,7 +42,7 @@ router.get("/:id", (req, res) => {
 
 // Update movie
 router.put("/:id", (req, res) => {
-	Movie.findById(req.params.id)
+	Movie.findByPk(req.params.id)
 	  .then(movie => {
 		movie.id = req.body.id;
 		movie.name = req.body.name;
@@ -57,16 +57,13 @@ router.put("/:id", (req, res) => {
 });
 
 //delet a movie;
-router.delete("/:id", (req, res) => {
-	Movie.findByIdAndDelete(req.params.id)
-		.then(movie => {
-			res.status(204)
-			res.send(movie)
-		})
-		.catch(err => {
-			res.status(400)
-			res.send(err)
-		})
+router.delete("/:id/delete", (req, res) => {
+	Movie.findByPk(req.params.id)
+	.then(movies => {
+		res.send("succes", movies)
+		res.sendStatus(200)
+	})
+	.catch(err => console.log(err))
 })
 
 module.exports = router

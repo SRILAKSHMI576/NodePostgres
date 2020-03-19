@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require("../config/database")
 const Movie = require("../models/movie")
 
-//get all data
+// get all data
 router.get("/", (req, res) => 
 Movie.findAll()
 	.then(movies => {
@@ -13,37 +13,32 @@ Movie.findAll()
 	.catch(err => console.log(err))
 )
 
-//get a single user by id
-// router.get("/:id", (req, res) => {
-// Movie.findById(req.params.id)
+//Add movie
+// router.post("/", (req, res) => {
+// 	const data = {
+// 		id: 7,
+// 		name: "stark",
+// 		age: 60
+// 	}
+// let {id, name, age} = data
+// Movie.create({
+// 	id,
+// 	name,
+// 	age
+// })
 // 	.then(movie => {
-// 		res.send(movie)
-// 		res.sendStatus(200)
-// 	})
-// 	.catch(err => console.log(err))
+// 			res.sendStatus(200)
+// 			res.redirect("/movie")
+// 		})
+// 		.catch(err => {
+// 			res.sendStatus(404)
+// 			res.send(err)
+// 		})
 // })
 
-//Add movie
-router.post("/", (req, res) => {
-	const data = {
-		id: 7,
-		name: "stark",
-		age: 60
-	}
-let {id, name, age} = data
-Movie.create({
-	id,
-	name,
-	age
-})
-	.then(movie => {
-			res.sendStatus(200)
-			res.redirect("/movie")
-		})
-		.catch(err => {
-			res.sendStatus(404)
-			res.send(err)
-		})
-})
+router.post("/", (req, res) => 
+console.log("----------", req.body)
+
+)
 
 module.exports = router

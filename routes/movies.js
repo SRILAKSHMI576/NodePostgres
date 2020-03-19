@@ -56,4 +56,17 @@ router.put("/:id", (req, res) => {
 	  .catch(err => res.status(400).json("Error: " + err));
 });
 
+//delet a movie;
+router.delete("/:id", (req, res) => {
+	Movie.findByIdAndDelete(req.params.id)
+		.then(movie => {
+			res.status(204)
+			res.send(movie)
+		})
+		.catch(err => {
+			res.status(400)
+			res.send(err)
+		})
+})
+
 module.exports = router

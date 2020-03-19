@@ -5,7 +5,7 @@ const Movie = require("../models/movie")
 
 // get all data
 router.get("/", (req, res) => 
-Movie.findAll()
+	Movie.findAll()
 	.then(movies => {
 		res.send(movies)
 		res.sendStatus(200)
@@ -31,14 +31,14 @@ router.post("/", (req, res) => {
 })
 
 //get movie by single id
-router.get("/:id", (req, res) => 
-Movie.findById(req.params.id)
+router.get("/:id", (req, res) => {
+	Movie.findById(req.params.id)
 	.then(movies => {
 		res.send(movies)
 		res.sendStatus(200)
 	})
 	.catch(err => console.log(err))
-)
+})
 
 // Update movie
 router.put("/:id", (req, res) => {

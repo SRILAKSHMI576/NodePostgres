@@ -14,31 +14,46 @@ Movie.findAll()
 )
 
 //Add movie
-// router.post("/", (req, res) => {
-// 	const data = {
-// 		id: 7,
-// 		name: "stark",
-// 		age: 60
-// 	}
-// let {id, name, age} = data
-// Movie.create({
-// 	id,
-// 	name,
-// 	age
-// })
-// 	.then(movie => {
-// 			res.sendStatus(200)
-// 			res.redirect("/movie")
-// 		})
-// 		.catch(err => {
-// 			res.sendStatus(404)
-// 			res.send(err)
-// 		})
-// })
+router.post("/", (req, res) => {
+	const body = req.body
+	console.log("body", body)
+	let myData = new Movie(body)
+	myData
+		.save()
+		.then(movie => {
+			res.status(201)
+			return res.send(movie)
+		})
+		.catch(err => {
+			res.status(404)
+			res.send(err)
+		})
+})
 
-router.post("/", (req, res) => 
-console.log("----------", req.body)
-
+//get movie by single id
+router.get("/:id", (req, res) => 
+Movie.findById(req.params.id)
+	.then(movies => {
+		res.send(movies)
+		res.sendStatus(200)
+	})
+	.catch(err => console.log(err))
 )
+
+// Update movie
+router.put("/:id", (req, res) => {
+	Movie.findById(req.params.id)
+	  .then(movie => {
+		movie.id = req.body.id;
+		movie.name = req.body.name;
+		movie.age = Number(req.body.age);
+		
+		movie
+		  .save()
+		  .then(() => res.json(movie))
+		  .catch(err => res.status(400).json("Error: " + err));
+	  })
+	  .catch(err => res.status(400).json("Error: " + err));
+});
 
 module.exports = router

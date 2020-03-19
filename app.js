@@ -8,6 +8,7 @@ const port = 5000
 
 const app = express()
 app.use(cors())
+app.use(bodyParser())
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}))
 app.set("view engine", "handlebars")
